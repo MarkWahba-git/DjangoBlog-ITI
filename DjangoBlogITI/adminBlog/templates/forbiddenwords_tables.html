@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block main_block %}
+  <div class="content-wrapper">
+    <div class="container-fluid">
+       <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Tables</li>
+      </ol>
+
+        <a href="new/"> <button type="button" class="btn btn-primary" >Add New Forbidden Word</button></a>
+      <br><br>
+
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Forbidden Words</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Word</th>
+                  <th span="2">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+              {% for w in allbadwords %}
+                <tr>
+                    <td>{{w.word}}</td>
+                     <td>
+                        <a href="{{w.id}}/update"><button type="button" class="btn btn-secondary"> Edit </button></a>
+                        <a href="{{w.id}}/delete"><button type="button" class="btn btn-danger"> Delete </button></a>
+                     </td>
+                </tr>
+              {% endfor %}
+
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    {% endblock %}
+
+</html>

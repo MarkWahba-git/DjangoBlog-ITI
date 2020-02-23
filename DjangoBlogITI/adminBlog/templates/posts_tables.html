@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% block main_block %}
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Tables</li>
+      </ol>
+
+      <a href="/post/new"> <button type="button" class="btn btn-primary" >create new post</button></a>
+        <br><br>
+      <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Posts
+
+
+</div>
+
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <tbody>
+             {%for post in all_posts %}
+              <tr>
+
+                    <div class="post">
+                     <td style="width:50%; height:20%;">
+                          <p>
+                         {% if post.picture%}
+                    <img  src="{{post.picture.url }}" width="300px" height="300px"/>
+                  {% endif %}
+              </p>
+
+                     <p style="color: #0056b3">{{ post.title }}
+                         <h5>{{ post.created_date }}</h5>
+                     </p>
+             <p>
+		    {{ post.content }}
+                </p>
+                         <a href = "/post/{{post.id}}/edit"><button type="button" class="btn btn-secondary">Edit</button></a>
+                  &nbsp;&nbsp;&nbsp;
+                         <a href = "/post/{{post.id}}/del"><button type="button" class="btn btn-danger">Delete</button></a>
+                         <a href = "/post/{{post.id}}"><button type="button" class="btn btn-secondary">show more</button></a>
+                     </td>
+                    </div>
+                {%  endfor  %}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+  {% endblock %}
+
+</html>
+
