@@ -11,8 +11,7 @@ Initial your database by :
         create database pyblog;
         \q
       ```
-  2) init the db file at ./pyblog/db.py
-  3) open the shell and config the db:
+  2) open the shell and config the db:
   ```
     python manage.py makemigration
     python manage.py migrate
