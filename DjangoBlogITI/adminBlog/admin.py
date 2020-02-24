@@ -10,7 +10,7 @@ UserAdmin.list_editable = ('is_active','is_staff')
 # Register your models here.
 
 admin.site.register(forbidden_words)
-#admin.site.register(category)
+admin.site.register(category)
 #admin.site.register(posts)
 #admin.site.register(tags)
 

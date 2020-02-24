@@ -9,7 +9,9 @@ urlpatterns=[
 	path('forbidden_delete/<id>',views.forbidden_delete),
 	path('forbidden_add',views.forbidden_add),
 	path('forbidden_edit/<id>',views.forbidden_edit),
-	path('categories',views.categories)
+	path('categories',views.categories),
+	path('cat_delete/<id>',views.cat_delete)
+	
 	
 	
 	

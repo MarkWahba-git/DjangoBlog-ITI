@@ -89,6 +89,10 @@ def categories(request):
 	return render(request,'categories.html',context)
 
 
+def cat_delete(request,id):
+	cat=category.objects.get(id=id)
+	cat.delete()
+	return HttpResponseRedirect('/adminBlog/categories')
 
 
 
