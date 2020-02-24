@@ -154,7 +154,11 @@ def category_edit(request,id):
 		category_form=cat_form(instance=cat)	
 		context={'category_form':category_form}
 		return render(request,'newcategory.html',context)
-
+#################################################################################
+def side_categories(request):
+	categories=category.objects.all()
+	context={'categories':categories}
+	return render(request,'side_bar.html',context)
 
 
 

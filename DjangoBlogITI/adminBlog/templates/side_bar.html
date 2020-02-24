@@ -1,0 +1,11 @@
+{%load static%}
+<head>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}"/>
+</head>
+<div class="col-md-4 float-right">
+<h1> select category</h1>
+
+		{% for st in categories %}
+		<a href="">{{st.name}}</a></br>
+		{% endfor %}
+	<div>
