@@ -68,8 +68,8 @@
 			</td>
 			<td>
 
-                          {% if usr.is_active == 1 %}
-                            <a href="/block/{{usr.id}}"><button type="button" class="btn btn-danger"> Block </button></a>
+                          {% if usr.is_active == True %}
+                            <a href="/adminBlog/user_block/{{usr.id}}"><button type="button" class="btn btn-danger"> Block </button></a>
 			</td>
                             <a href="/promote/{{usr.id}}"><button type="button" class="btn btn-success"> Promote </button></a>
 

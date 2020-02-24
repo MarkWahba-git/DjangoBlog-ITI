@@ -5,6 +5,7 @@ urlpatterns=[
 	path('user_add',views.user_add),
 	path('user_delete/<id>',views.user_delete),
 	path('user_edit/<id>',views.user_edit),
+	path('user_block/<id>',views.user_block),
 	path('forbidden',views.forbidden),
 	path('forbidden_delete/<id>',views.forbidden_delete),
 	path('forbidden_add',views.forbidden_add),

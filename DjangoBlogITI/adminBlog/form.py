@@ -14,7 +14,7 @@ class word_form(forms.ModelForm):
 class usr_block(forms.ModelForm):
 	class Meta:
 		model=User
-		fields=('username','email','password','is_active','is_staff')
+		fields=('is_active',)
 
 
 class cat_form(forms.ModelForm):

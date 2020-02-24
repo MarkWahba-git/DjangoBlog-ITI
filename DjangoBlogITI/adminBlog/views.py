@@ -44,6 +44,21 @@ def user_edit(request,id):
 		user_form=usr_form(instance=usr)	
 		context={'usr_form':user_form}
 		return render(request,'user_form.html',context)
+
+
+
+def user_block(request,id):
+	usr=User.objects.get(id=id)
+	if request.method=='POST':
+		user_bk=usr_block(request.POST,instance=usr)
+		if user_bk.is_valid():
+			user_bk.save()
+			return HttpResponseRedirect('/adminBlog/users')
+
+	else:
+		user_bk=usr_block(instance=usr)
+		context={'usr_bk':user_bk}
+		return render(request,'block.html',context)
 ####################################################################
 def forbidden(request):
 	all_forbidden=forbidden_words.objects.all()
