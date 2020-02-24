@@ -82,9 +82,11 @@ def forbidden_edit(request,id):
 		words_form=word_form(instance=word)	
 		context={'word_form':words_form}
 		return render(request,'newbadword.html',context)
-
-
-
+#####################################################################################
+def categories(request):
+	categories=category.objects.all()
+	context={'categories':categories}
+	return render(request,'categories.html',context)
 
 
 
