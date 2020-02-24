@@ -31,3 +31,17 @@ def user_delete(request,id):
 	usr=User.objects.get(id=id)
 	usr.delete()
 	return HttpResponseRedirect('/adminBlog/users')
+
+def user_edit(request,id):
+	usr=User.objects.get(id=id)
+	if request.method=='POST':
+		user_form=usr_form(request.POST,instance=usr)
+		if user_form.is_valid():
+			user_form.save()
+			return HttpResponseRedirect('/adminBlog/users')
+
+	else:
+		user_form=usr_form(instance=usr)	
+		context={'usr_form':user_form}
+		return render(request,'user_form.html',context)
+
