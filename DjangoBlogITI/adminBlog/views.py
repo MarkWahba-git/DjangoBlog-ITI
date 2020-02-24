@@ -4,7 +4,7 @@ from adminBlog.models import forbidden_words,category
 #posts,
 from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
-#from adminBlog.form import cat_form,word_form,usr_block
+from adminBlog.form import cat_form,word_form,usr_block
 from django.contrib.auth.backends import BaseBackend
 
 
@@ -55,6 +55,20 @@ def forbidden_delete(request,id):
 	word=forbidden_words.objects.get(id=id)
 	word.delete()
 	return HttpResponseRedirect('/adminBlog/forbidden')
+
+
+def forbidden_add(request):
+	if request.method=='POST':
+		words_form=word_form(request.POST)
+		if words_form.is_valid():
+			words_form.save()
+			return HttpResponseRedirect('/adminBlog/forbidden')
+
+
+	else:
+		words_form=word_form()
+		context={'word_form':words_form}
+		return render(request,'newbadword.html',context)
 
 
 
