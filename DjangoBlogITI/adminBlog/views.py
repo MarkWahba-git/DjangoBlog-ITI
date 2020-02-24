@@ -4,7 +4,7 @@ from adminBlog.models import forbidden_words,category
 #posts,
 from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
-from adminBlog.form import cat_form,word_form,usr_block
+from adminBlog.form import cat_form,word_form,usr_block,usr_promote
 from django.contrib.auth.backends import BaseBackend
 
 
@@ -59,6 +59,20 @@ def user_block(request,id):
 		user_bk=usr_block(instance=usr)
 		context={'usr_bk':user_bk}
 		return render(request,'block.html',context)
+
+def user_promote(request,id):
+	usr=User.objects.get(id=id)
+	if request.method=='POST':
+		user_pm=usr_promote(request.POST,instance=usr)
+		if user_pm.is_valid():
+			user_pm.save()
+			return HttpResponseRedirect('/adminBlog/users')
+
+	else:
+		user_pm=usr_promote(instance=usr)
+		context={'usr_pm':user_pm}
+		return render(request,'promote.html',context)
+
 ####################################################################
 def forbidden(request):
 	all_forbidden=forbidden_words.objects.all()

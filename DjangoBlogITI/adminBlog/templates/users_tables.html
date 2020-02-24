@@ -32,7 +32,7 @@
                   <th>Email</th>
                   <th>is_active</th>
                   <th>is_staff</th>
-                  <th span="3">Actions</th>
+                  <th span="4">Actions</th>
                 </tr>
               </thead>
               <tfoot>
@@ -71,12 +71,14 @@
                           {% if usr.is_active == True %}
                             <a href="/adminBlog/user_block/{{usr.id}}"><button type="button" class="btn btn-danger"> Block </button></a>
 			</td>
-                            <a href="/promote/{{usr.id}}"><button type="button" class="btn btn-success"> Promote </button></a>
 
                         {% else %}
-                            <a href="/unblock/{{usr.id}}"><button type="button" class="btn btn-primary"> Unblock </button></a>
+                            <a href="/adminBlog/user_block/{{usr.id}}"><button type="button" class="btn btn-primary"> Unblock </button></a>
                         </td>
                         {% endif %}
+			<td>
+			    <a href="/adminBlog/user_promote/{{usr.id}}"><button type="button" class="btn btn-success"> Promote </button></a>
+			</td>
                     {% endif %}
                 </tr>
               {% endfor %}

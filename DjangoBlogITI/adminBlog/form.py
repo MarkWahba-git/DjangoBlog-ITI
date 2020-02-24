@@ -15,6 +15,10 @@ class usr_block(forms.ModelForm):
 	class Meta:
 		model=User
 		fields=('is_active',)
+class usr_promote(forms.ModelForm):
+	class Meta:
+		model=User
+		fields=('is_staff',)
 
 
 class cat_form(forms.ModelForm):
