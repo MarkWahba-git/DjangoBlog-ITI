@@ -56,7 +56,7 @@ ROOT_URLCONF = 'DjangoBlogITI.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'adminBlog/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,9 +78,9 @@ WSGI_APPLICATION = 'DjangoBlogITI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'djangoBlogdb',
+        'NAME': 'pyblog',
         'USER': 'root' ,	
-		'PASSWORD':'thinkpad'	
+		'PASSWORD':'987*654*321'	
     }
 }
 

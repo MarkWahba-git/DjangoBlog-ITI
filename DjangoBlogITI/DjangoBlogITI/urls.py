@@ -28,6 +28,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+     path('adminBlog/', include('adminBlog.urls'))
 ]
 # urlpatterns = [
 #     url(r'^login_form$', login_form),
