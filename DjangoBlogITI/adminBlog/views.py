@@ -98,6 +98,20 @@ def cat_delete(request,id):
 
 
 
+def category_add(request):
+	if request.method=='POST':
+		category_form=cat_form(request.POST)
+		if category_form.is_valid():
+			category_form.save()
+			return HttpResponseRedirect('/adminBlog/categories')
+
+
+	else:
+		category_form=cat_form()
+		context={'category_form':category_form}
+		return render(request,'newcategory.html',context)	
+
+
 
 
 

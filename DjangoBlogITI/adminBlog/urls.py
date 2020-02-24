@@ -10,7 +10,9 @@ urlpatterns=[
 	path('forbidden_add',views.forbidden_add),
 	path('forbidden_edit/<id>',views.forbidden_edit),
 	path('categories',views.categories),
-	path('cat_delete/<id>',views.cat_delete)
+	path('cat_delete/<id>',views.cat_delete),
+	path('category_add',views.category_add)
+	
 	
 	
 	
