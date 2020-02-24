@@ -44,4 +44,27 @@ def user_edit(request,id):
 		user_form=usr_form(instance=usr)	
 		context={'usr_form':user_form}
 		return render(request,'user_form.html',context)
+####################################################################
+def forbidden(request):
+	all_forbidden=forbidden_words.objects.all()
+	context={'all_forbidden':all_forbidden}
+	return render(request,'forbiddenwords_tables.html',context)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

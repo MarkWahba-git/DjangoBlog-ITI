@@ -24,18 +24,20 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
                 <tr>
+		  <th>id</th>
                   <th>Word</th>
                   <th span="2">Actions</th>
                 </tr>
               </thead>
 
               <tbody>
-              {% for w in allbadwords %}
+              {% for w in all_forbidden %}
                 <tr>
+		    <td>{{w.id}}</td>
                     <td>{{w.word}}</td>
                      <td>
-                        <a href="{{w.id}}/update"><button type="button" class="btn btn-secondary"> Edit </button></a>
-                        <a href="{{w.id}}/delete"><button type="button" class="btn btn-danger"> Delete </button></a>
+                        <a href='/blog/forbidden_edit/{{st.id}}'><button type="button" class="btn btn-secondary"> Edit </button></a>
+                        <a href='/blog/forbidden_delete/{{st.id}}'><button type="button" class="btn btn-danger"> Delete </button></a>
                      </td>
                 </tr>
               {% endfor %}
