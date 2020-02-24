@@ -51,6 +51,14 @@ def forbidden(request):
 	return render(request,'forbiddenwords_tables.html',context)
 
 
+def forbidden_delete(request,id):
+	word=forbidden_words.objects.get(id=id)
+	word.delete()
+	return HttpResponseRedirect('/adminBlog/forbidden')
+
+
+
+
 
 
 
