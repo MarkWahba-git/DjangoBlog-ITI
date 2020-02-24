@@ -14,7 +14,7 @@
         <li class="breadcrumb-item active">Tables</li>
       </ol>
 
-      <a href="/user/new/"> <button type="button" class="btn btn-primary" >Add New User</button></a>
+      <a href="/adminBlog/user_add"> <button type="button" class="btn btn-primary" >Add New User</button></a>
 
       <br><br>
 
@@ -27,41 +27,50 @@
 
               <thead>
                 <tr>
+		  <th>id</th>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Join Date</th>
-                  <th>Last Login</th>
+                  <th>is_active</th>
+                  <th>is_staff</th>
                   <th span="3">Actions</th>
                 </tr>
               </thead>
               <tfoot>
                 <tr>
+                  <th>id</th>
                   <th>Username</th>
                   <th>Email</th>
-                  <th>Join Date</th>
-                  <th>Last Login</th>
+                  <th>is_active</th>
+                  <th>is_staff</th>
                   <th span="3">Actions</th>
                 </tr>
               </tfoot>
               <tbody>
-              {% for usr in allusers %}
+              {% for usr in all_users %}
                 <tr>
-                    {% if usr.is_superuser == 1 %}
+                    {% if usr.is_staff == True %}
+			<td style="bachground:red" ><font color="red">{{usr.id}}</font></td>
                         <td><font color="red">{{usr.username}}</font></td>
                         <td><font color="red">{{usr.email}}</font></td>
-                        <td><font color="red">{{usr.date_joined}}</font></td>
-                        <td><font color="red">{{usr.last_login}}</font></td>
+                        <td><font color="red">{{usr.is_active}}</font></td>
+                        <td><font color="red">{{usr.is_staff}}</font></td>
                     {% else %}
+			<td>{{usr.id}}</td>
                         <td>{{usr.username}}</td>
                         <td>{{usr.email}}</td>
-                        <td>{{usr.date_joined}}</td>
-                        <td>{{usr.last_login}}</td>
+                        <td>{{usr.is_active}}</td>
+                        <td>{{usr.is_staff}}</td>
                         <td>
                           <a href="/{{usr.id}}/delete"><button type="button" class="btn btn-danger"> Delete </button></a>
+			</td>
+			<td>
                           <a href="/{{usr.id}}/update"><button type="button" class="btn btn-secondary"> Edit </button></a>
+			</td>
+			<td>
 
                           {% if usr.is_active == 1 %}
                             <a href="/block/{{usr.id}}"><button type="button" class="btn btn-danger"> Block </button></a>
+			</td>
                             <a href="/promote/{{usr.id}}"><button type="button" class="btn btn-success"> Promote </button></a>
 
                         {% else %}
