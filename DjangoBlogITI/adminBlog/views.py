@@ -113,6 +113,18 @@ def category_add(request):
 
 
 
+def category_edit(request,id):
+	cat=category.objects.get(id=id)
+	if request.method=='POST':
+		category_form=cat_form(request.POST,instance=cat)
+		if category_form.is_valid():
+			category_form.save()
+			return HttpResponseRedirect('/adminBlog/categories')
+
+	else:
+		category_form=cat_form(instance=cat)	
+		context={'category_form':category_form}
+		return render(request,'newcategory.html',context)
 
 
 
