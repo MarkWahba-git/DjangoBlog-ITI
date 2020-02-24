@@ -70,7 +70,18 @@ def forbidden_add(request):
 		context={'word_form':words_form}
 		return render(request,'newbadword.html',context)
 
+def forbidden_edit(request,id):
+	word=forbidden_words.objects.get(id=id)
+	if request.method=='POST':
+		words_form=word_form(request.POST,instance=word)
+		if words_form.is_valid():
+			words_form.save()
+			return HttpResponseRedirect('/adminBlog/forbidden')
 
+	else:
+		words_form=word_form(instance=word)	
+		context={'word_form':words_form}
+		return render(request,'newbadword.html',context)
 
 
 

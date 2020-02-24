@@ -7,7 +7,9 @@ urlpatterns=[
 	path('user_edit/<id>',views.user_edit),
 	path('forbidden',views.forbidden),
 	path('forbidden_delete/<id>',views.forbidden_delete),
-	path('forbidden_add',views.forbidden_add)
+	path('forbidden_add',views.forbidden_add),
+	path('forbidden_edit/<id>',views.forbidden_edit)
+	
 	
 
 
