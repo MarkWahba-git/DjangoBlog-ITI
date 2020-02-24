@@ -26,3 +26,8 @@ def user_add(request):
 		user_form=usr_form()
 		context={'usr_form':user_form}
 		return render(request,'user_form.html',context)	
+
+def user_delete(request,id):
+	usr=User.objects.get(id=id)
+	usr.delete()
+	return HttpResponseRedirect('/adminBlog/users')
