@@ -54,7 +54,7 @@ def body(request):
     # 'title':'home page',
     'posts':Post.objects.all(),
     }
-    return render(request,'inddexx.html',context)
+    return render(request,'indeex.html',context)
 
 #def createpost (request):
     #return render(request ,'post/createpost.html')
