@@ -24,7 +24,16 @@ urlpatterns=[
 
 	path('all_posts',views.all_posts),
 	path('post_delete/<id>',views.post_delete),
+	path('select/<name>',views.select)
 
+<<<<<<< HEAD
+=======
+
+
+	
+
+
+>>>>>>> d9bddb01ec6bcc1bd24f9f409c7d677d6884bd2c
     ]  
 	
 	

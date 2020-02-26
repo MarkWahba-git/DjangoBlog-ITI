@@ -32,8 +32,13 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+<<<<<<< HEAD
     path('adminBlog/', include('adminBlog.urls')),
     # path('djangoBlog/',include('djangoBlog.urls')),
+=======
+     path('adminBlog/', include('adminBlog.urls')),
+	path('djangoBlog/', include('djangoBlog.urls'))
+>>>>>>> d9bddb01ec6bcc1bd24f9f409c7d677d6884bd2c
 ]
 urlpatterns +=staticfiles_urlpatterns()
 if settings.DEBUG:
