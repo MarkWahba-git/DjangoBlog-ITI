@@ -1,7 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.models import User
-from adminBlog.models import forbidden_words,category
-#posts,
+from adminBlog.models import forbidden_words,category,Post
 from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
 from adminBlog.form import cat_form,word_form,usr_block,usr_promote
@@ -237,15 +236,15 @@ def addreplay(request,commentid):
 
 
 
+#############################################
+def all_posts(request):
+	all_posts=Post.objects.all()
+	context={'all_posts':all_posts}
+	return  render(request,'posts.html',context)
 
 
-
-
-
-
-
-
-
-
-
-
+def post_delete(request,id):
+	post=Post.objects.get(id=id)
+	post.delete()
+	return HttpResponseRedirect('/adminBlog/all_posts')
+	

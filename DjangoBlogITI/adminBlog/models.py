@@ -35,6 +35,9 @@ class Post (models.Model):
 	category_id=models.ForeignKey(category,on_delete=models.DO_NOTHING)
 	tag_name=models.ManyToManyField(Tags)
 
+	def __str__(self):
+		return self.title
+
 
 	def __str__(self):
 		return self.title 
@@ -58,5 +61,6 @@ class reply(models.Model):
 	comment_id=models.ForeignKey(Comment , on_delete=models.DO_NOTHING)
 
 	
+
 
 
