@@ -15,17 +15,16 @@ urlpatterns=[
 	path('cat_delete/<id>',views.cat_delete),
 	path('category_add',views.category_add),
 	path('category_edit/<id>',views.category_edit),
-	path('side_categories',views.side_categories)
-	
-	
-	
-	
-	
-	
+	path('side_categories',views.side_categories),
+############################################### my pages
+	path('post', views.createpost),
+	path('index',views.body),
+	path('showpostdetails/<postid>/',views.post_detail),
+	path('showpostdetails/<postid>/addcomment',views.addcomment)
 	
 
-
-
-
-
-]
+    ]  
+	
+	
+	
+	
