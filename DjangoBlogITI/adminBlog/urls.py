@@ -17,6 +17,7 @@ urlpatterns=[
 	path('category_edit/<id>',views.category_edit),
 	path('side_categories',views.side_categories),
 
+
 ############################################### my pages
 	path('post', views.createpost),
 	path('index',views.index),
@@ -25,7 +26,9 @@ urlpatterns=[
 
 	path('all_posts',views.all_posts),
 	path('post_delete/<id>',views.post_delete),
-	path('select/<name>',views.select)
+	path('select/<name>',views.select),
+	path('post_edit/<id>',views.post_edit)
+	# path('post_add',views.post_add)
 
 
 

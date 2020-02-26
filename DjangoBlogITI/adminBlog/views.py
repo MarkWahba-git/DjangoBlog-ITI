@@ -168,6 +168,12 @@ def select(request,name):
 		post=Post.objects.filter(category_id=cat)
 		context={'post':post}
 		return render(request,'select.html',context)
+#def subscribe_fun(request,name):
+
+
+
+
+
 
 ####################################################################################3
 
@@ -178,7 +184,7 @@ def index(request):
 	'title':'home page',
 	'posts':Post.objects.all(),
 	}
-	return render(request,'adminBlog/index.html',context)
+	return render(request,'index.html',context)
 
 #def createpost (request):
 	#return render(request ,'post/createpost.html')
@@ -202,10 +208,10 @@ def createpost(request):
 	    form = postform(request.POST)
 	    if form.is_valid():
 	    	form.save()
-	    	return HttpResponseRedirect("/adminBlog/index")
+	    	return HttpResponseRedirect('/adminBlog/all_posts')
 	else:
 	    form = postform()
-	    return render(request,'adminBlog/post.html', {'form': form})
+	    return render(request,'post.html', {'form': form})
 
 
 def addcomment(request,postid):
@@ -254,4 +260,31 @@ def post_delete(request,id):
 	post=Post.objects.get(id=id)
 	post.delete()
 	return HttpResponseRedirect('/adminBlog/all_posts')
+
+# def post_add(request):
+# 	if request.method=='POST':
+# 		posts_form=post_form(request.POST)
+# 		if posts_form.is_valid():
+# 			posts_form.save()
+# 			return HttpResponseRedirect('/adminBlodg/all_posts')
+
+
+# 	else:
+# 		posts_form=post_form()
+# 		context={'posts_form':post_form}
+# 		return render(request,'adminBlog/post.html',context)	
+
+def post_edit(request,id):
+	post=Post.objects.get(id=id)
+	if request.method=='POST':
+		posts_form=postform(request.POST,instance=post)
+		if posts_form.is_valid():
+			posts_form.save()
+			return HttpResponseRedirect('/adminBlog/all_posts')
+
+	else:
+		posts_form=postform(instance=post)	
+		context={'form':posts_form}
+		return render(request,'post.html',context)
+
 

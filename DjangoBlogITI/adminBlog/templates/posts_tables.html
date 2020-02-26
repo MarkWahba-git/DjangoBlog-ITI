@@ -13,36 +13,36 @@
         <li class="breadcrumb-item active">Tables</li>
       </ol>
 
-      <a href="/post/new"> <button type="button" class="btn btn-primary" >create new post</button></a>
+      <!-- <a href="/adminBlog/post"> <button type="button" class="btn btn-primary" >create new post</button></a>
         <br><br>
-      <!-- Example DataTables Card-->
-      <div class="card mb-3">
+      Example DataTables Card-->
+      <!-- <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Posts
+          <i class="fa fa-table"></i> Posts --> -->
 
 
-</div>
+<!-- </div>
 
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <tbody>
-             {%for post in all_posts %}
+             {%for postt in all_posts %}
               <tr>
 
                     <div class="post">
                      <td style="width:50%; height:20%;">
                           <p>
                          {% if post.image%}
-                    <img  src="{{post.image}}" width="300px" height="300px"/>
+                    <img  src="{{postt.image}}" width="300px" height="300px"/>
                          {% endif %}
               </p>
 
                      <p style="color: #0056b3">{{ post.title }}
-                         <h5>{{ post.time }}</h5>
+                         <h5>{{ postt.time }}</h5>
                      </p>
              <p>
-		    {{ post.content }}
+		    {{ postt.content }}
                 </p>
                          <a href = "/post/{{post.id}}/edit"><button type="button" class="btn btn-secondary">Edit</button></a>
                   &nbsp;&nbsp;&nbsp;
@@ -60,7 +60,7 @@
       </div>
 
 
-    </div>
+    </div> -->
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
   {% endblock %}
