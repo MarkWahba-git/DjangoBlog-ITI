@@ -167,7 +167,7 @@ def side_categories(request):
 
 
 
-def body (request):
+def index(request):
 	context={
 	'title':'home page',
 	'posts':Post.objects.all(),

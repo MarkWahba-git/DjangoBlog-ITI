@@ -19,7 +19,7 @@ urlpatterns=[
 
 ############################################### my pages
 	path('post', views.createpost),
-	path('index',views.body),
+	path('index',views.index),
 	path('showpostdetails/<postid>/',views.post_detail),
 	path('showpostdetails/<postid>/addcomment',views.addcomment),
 
