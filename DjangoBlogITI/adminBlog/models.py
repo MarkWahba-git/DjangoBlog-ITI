@@ -34,3 +34,28 @@ class Post (models.Model):
 	category_id=models.ForeignKey(category,on_delete=models.DO_NOTHING)
 	tag_name=models.ManyToManyField(Tags)
 
+
+	def __str__(self):
+		return self.title 
+
+	class Meta:
+		ordering = ('-post_date', )
+
+
+class Comment (models.Model):
+	post_name=models.ForeignKey(Post, on_delete=models.CASCADE)
+	user_id=models.ForeignKey(User, on_delete=models.CASCADE,default='1')
+	comment_content=models.TextField(max_length=100)
+
+
+	def __str__(self):
+		return self.comment_content	
+
+class reply(models.Model):
+	reply_content=models.TextField(max_length=100)
+	user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+	comment_id=models.ForeignKey(Comment , on_delete=models.DO_NOTHING)
+
+	
+
+
