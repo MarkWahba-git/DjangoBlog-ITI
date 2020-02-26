@@ -15,7 +15,11 @@ urlpatterns=[
 	path('cat_delete/<id>',views.cat_delete),
 	path('category_add',views.category_add),
 	path('category_edit/<id>',views.category_edit),
-	path('side_categories',views.side_categories)
+	path('side_categories',views.side_categories),
+	path('all_posts',views.all_posts),
+	path('post_delete/<id>',views.post_delete)
+
+
 	
 	
 	

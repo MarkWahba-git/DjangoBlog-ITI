@@ -33,13 +33,13 @@
                     <div class="post">
                      <td style="width:50%; height:20%;">
                           <p>
-                         {% if post.picture%}
-                    <img  src="{{post.picture.url }}" width="300px" height="300px"/>
-                  {% endif %}
+                         {% if post.image%}
+                    <img  src="{{post.image}}" width="300px" height="300px"/>
+                         {% endif %}
               </p>
 
                      <p style="color: #0056b3">{{ post.title }}
-                         <h5>{{ post.created_date }}</h5>
+                         <h5>{{ post.time }}</h5>
                      </p>
              <p>
 		    {{ post.content }}
