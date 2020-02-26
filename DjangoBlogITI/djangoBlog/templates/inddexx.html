@@ -2,6 +2,7 @@
 <html lang="en">
 {% load static %}
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -56,16 +57,11 @@
             <ul class="navbar-nav ml-auto">
 
 
-                {% if user %}
-                    {% if admin %}
+     
                         <li class="nav-item">
                             <a class="nav-link" href="/index">admin page</a>
                         </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">logout</a>
-                    </li>
-                {% else %}
+                 
                     <li class="nav-item active">
                         <a class="nav-link" href="/login_form">Login
                             <!-- <span class="sr-only">(current)</span> -->
@@ -74,13 +70,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/signup">Register</a>
                     </li>
-                {% endif %}
+                
 
             </ul>
 
         </div>
     </div>
 </nav>
+
+
+
 
 <!-- Page Content -->
 <div class="container">
@@ -96,6 +95,29 @@
         <!-- /.col-lg-3 -->
 
         <div id="posts" class="col-lg-9">
+
+
+
+
+{% for post in posts %}
+    <div>
+
+    <h3>{{post.title}}</h3> 
+    
+        <span>published in {{post.post_date|date:'d-m-y'}}</span>
+        <p>{{post.content}}</p>
+        {% if post.image %}
+        <img src="{{post.image.url}}" alt="Not found">
+         {% endif %}
+
+         <button type="button"><a href="/djangoBlog/showpostdetails/{{post.id}}">Read more</a></button>
+
+    </div>
+
+
+
+{% endfor %}
+
 
             <!-- /.card -->
 
