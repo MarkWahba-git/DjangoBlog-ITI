@@ -1,15 +1,15 @@
 from django.shortcuts import render,get_object_or_404
+from adminBlog.models import forbidden_words,category,Post
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.views import (
-    LoginView,
-)
+from django.contrib.auth.views import LoginView
 from .forms import UserRegisterationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from adminBlog.models import Post, Comment ,Tags ,reply
 from djangoBlog.forms import postform,commentform
+from adminBlog.models import Post, Comment ,Tags ,reply,subscribe
 
 def signup(request):
     if request.method == 'POST':
@@ -50,9 +50,22 @@ def confirm_login_allowed(self, user):
 
 
 def body(request):
+    categories=category.objects.all()
+    subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+    lst= []
+    for cat in categories:
+        print(cat.id)
+        print(subs)
+        if cat.id in subs:
+            check = cat.id
+        else:
+            check =-1
+        lst.append(check)
+    print(lst)
     context={
     # 'title':'home page',
     'posts':Post.objects.all(),
+    'categories':categories, 'lst':lst
     }
     return render(request,'indeex.html',context)
 
@@ -90,3 +103,45 @@ def addreplay(request,commentid):
         obj=Comment(post_name=post,user_id=user,comment_content=con)
         obj.save()
         return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
+#############################################################################
+def side_categories(request):
+	categories=category.objects.all()
+	subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+	lst= []
+	for cat in categories:
+		print(cat.id)
+		print(subs)
+		if cat.id in subs:
+			check = cat.id
+		else:
+			check =-1
+		lst.append(check)
+	print(lst)
+	context={'categories':categories, 'lst':lst}
+
+	return render(request,'indeex.html',context)
+
+def select(request,name):
+	catt=category.objects.filter(name=name)
+	for cat in catt:
+		post=Post.objects.filter(category_id=cat)
+		context={'post':post}
+		return render(request,'select.html',context)
+#def subscribe_fun(request,name):
+
+def subscribes(request, category_id):
+	print("ok")	
+	try:
+		cat = category.objects.get(id = category_id)
+		subscribe.objects.create(user_id = request.user, category_id = cat)
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
+
+
+def unsubscribe(request,category_id):
+	try:
+		cat = category.objects.get(id = category_id)
+		sub = subscribe.objects.get(user_id = request.user, category_id = cat)
+		sub.delete()
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
