@@ -29,7 +29,7 @@ class Post (models.Model):
 	title= models.CharField(max_length=100)
 	post_date=models.DateTimeField(default=timezone.now)
 	post_update=models.DateTimeField(auto_now=True)
-	image=models.FileField( blank=True)
+	image=models.FileField()
 	content=models.TextField()
 	user_id=models.ForeignKey(User, on_delete=models.CASCADE)
 	category_id=models.ForeignKey(category,on_delete=models.DO_NOTHING)

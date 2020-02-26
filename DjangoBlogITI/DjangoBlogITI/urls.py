@@ -32,7 +32,8 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('adminBlog/', include('adminBlog.urls'))
+    path('adminBlog/', include('adminBlog.urls')),
+    # path('djangoBlog/',include('djangoBlog.urls')),
 ]
 urlpatterns +=staticfiles_urlpatterns()
 if settings.DEBUG:
