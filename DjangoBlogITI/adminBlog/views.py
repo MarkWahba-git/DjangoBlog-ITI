@@ -173,12 +173,12 @@ def select(request,name):
 
 
 
-def index(request):
+def body(request):
 	context={
 	'title':'home page',
 	'posts':Post.objects.all(),
 	}
-	return render(request,'adminBlog/index.html',context)
+	return render(request,'body.html',context)
 
 #def createpost (request):
 	#return render(request ,'post/createpost.html')
@@ -189,7 +189,7 @@ def post_detail(request,postid):
 	context={
 	'post':post,'comment':coms
 	}
-	return render(request,'adminBlog/showpostdetails.html',context)
+	return render(request,'showpostdetails.html',context)
 
 def like_post(request):
 	post=get_object_or_404(post,id=request.post.get('postid'))	
@@ -199,10 +199,10 @@ def like_post(request):
 
 def createpost(request):
 	if request.method=="POST":
-	    form = postform(request.POST)
+	    form = postform(request.POST,request.FILES)
 	    if form.is_valid():
 	    	form.save()
-	    	return HttpResponseRedirect("/adminBlog/index")
+	    	return HttpResponseRedirect("/adminBlog/body")
 	else:
 	    form = postform()
 	    return render(request,'adminBlog/post.html', {'form': form})
