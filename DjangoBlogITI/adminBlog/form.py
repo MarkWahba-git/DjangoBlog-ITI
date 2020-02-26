@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from adminBlog.models import category,forbidden_words
+from adminBlog.models import category,forbidden_words,Post,Tags,Comment
 class usr_form(forms.ModelForm):
 	class Meta:
 		model=User
@@ -25,3 +25,19 @@ class cat_form(forms.ModelForm):
 	class Meta:
 		model=category
 		fields=('name',)
+
+
+class postform(forms.ModelForm):
+	
+	class Meta:
+		model = Post
+		fields = ['title','post_date','image','content','user_id','category_id','tag_name']
+
+
+
+class commentform(forms.ModelForm):
+
+	class Meta:
+		model= Comment
+		fields=['comment_content']
+

@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.models import User
 from adminBlog.models import forbidden_words,category,Post
 from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
 from adminBlog.form import cat_form,word_form,usr_block,usr_promote
 from django.contrib.auth.backends import BaseBackend
+from .models import Post, Comment ,Tags ,reply
+from adminBlog.form import postform,commentform
+#from .forms import postform,commentform
 
 
 # Create your views here.
@@ -165,6 +168,81 @@ def select(request,name):
 		post=Post.objects.filter(category_id=cat)
 		context={'post':post}
 		return render(request,'select.html',context)
+
+####################################################################################3
+
+
+
+def index(request):
+	context={
+	'title':'home page',
+	'posts':Post.objects.all(),
+	}
+	return render(request,'adminBlog/index.html',context)
+
+#def createpost (request):
+	#return render(request ,'post/createpost.html')
+
+def post_detail(request,postid):
+	post=get_object_or_404(Post,pk=postid)
+	coms=Comment.objects.filter(post_name_id=postid)
+	context={
+	'post':post,'comment':coms
+	}
+	return render(request,'adminBlog/showpostdetails.html',context)
+
+def like_post(request):
+	post=get_object_or_404(post,id=request.post.get('postid'))	
+	post.likes.add(request,user)
+	return HttpResponseRedirect(post.get.absolute_url())
+
+
+def createpost(request):
+	if request.method=="POST":
+	    form = postform(request.POST)
+	    if form.is_valid():
+	    	form.save()
+	    	return HttpResponseRedirect("/adminBlog/index")
+	else:
+	    form = postform()
+	    return render(request,'adminBlog/post.html', {'form': form})
+
+
+def addcomment(request,postid):
+	if request.method=="POST":		
+		post=get_object_or_404(Post,pk=postid)
+		user=request.user
+		con=request.POST.get('message')
+		obj=Comment(post_name=post,user_id=user,comment_content=con)
+		obj.save()
+		return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
+
+def addreplay(request,commentid):
+	if request.method=="POST":		
+		comment=get_object_or_404(Post,pk=commentid)
+		user=request.user
+		con=request.POST.get('message')
+		obj=Comment(post_name=post,user_id=user,comment_content=con)
+		obj.save()
+		return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
+	
+
+	#def createpost(request):
+	#form = postform(request.POST or None) 
+
+	#if form.is_valid():
+		#form.save()
+	#else:
+		#form= postform()
+
+	#context={
+		#'from':form,
+	#}
+	#return render(request,'post/createpost.html',context)
+
+
+
+
 #############################################
 def all_posts(request):
 	all_posts=Post.objects.all()
