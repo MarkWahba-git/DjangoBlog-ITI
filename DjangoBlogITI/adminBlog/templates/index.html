@@ -84,28 +84,6 @@
 
     </div>
 </div>
-
-
-
-{% for post in posts %}
-    <div>
-
-    <h3>{{post.title}}</h3> 
-    
-        <span>published in {{post.post_date|date:'d-m-y'}}</span>
-        <p>{{post.content}}</p>
-        {% if post.image %}
-        <img src="{{post.image.url}}" alt="Not found">
-         {% endif %}
-
-         <button type="button"><a href="showpostdetails/{{post.id}}">Read more</a></button>
-
-    </div>
-
-
-
-{% endfor %}
-
 <!-- /.container-fluid-->
 <!-- /.content-wrapper-->
 {% endblock %}

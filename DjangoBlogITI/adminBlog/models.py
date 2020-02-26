@@ -31,7 +31,7 @@ class Post (models.Model):
 	post_update=models.DateTimeField(auto_now=True)
 	image=models.FileField()
 	content=models.TextField()
-	user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+	user_id=models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	category_id=models.ForeignKey(category,on_delete=models.DO_NOTHING)
 	tag_name=models.ManyToManyField(Tags)
 
@@ -47,8 +47,8 @@ class Post (models.Model):
 
 
 class Comment (models.Model):
-	post_name=models.ForeignKey(Post, on_delete=models.CASCADE)
-	user_id=models.ForeignKey(User, on_delete=models.CASCADE,default='1')
+	post_name=models.ForeignKey(Post, on_delete=models.DO_NOTHING)
+	user_id=models.ForeignKey(User, on_delete=models.DO_NOTHING,default='1')
 	comment_content=models.TextField(max_length=100)
 
 
@@ -57,7 +57,7 @@ class Comment (models.Model):
 
 class reply(models.Model):
 	reply_content=models.TextField(max_length=100)
-	user_id=models.ForeignKey(User, on_delete=models.CASCADE)
+	user_id=models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	comment_id=models.ForeignKey(Comment , on_delete=models.DO_NOTHING)
 
 	

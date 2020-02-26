@@ -16,6 +16,13 @@ urlpatterns=[
 	path('category_add',views.category_add),
 	path('category_edit/<id>',views.category_edit),
 	path('side_categories',views.side_categories),
+	path('sub/<category_id>', views.subscribes, name ='subscribes'),
+    path('unsub/<category_id>', views.unsubscribe, name ='unsubscribe'),
+
+
+
+
+
 ############################################### my pages
 	path('post', views.createpost),
 	path('body',views.body),
@@ -24,8 +31,9 @@ urlpatterns=[
 
 	path('all_posts',views.all_posts),
 	path('post_delete/<id>',views.post_delete),
-	path('select/<name>',views.select)
-
+	path('select/<name>',views.select),
+	path('post_edit/<id>',views.post_edit)
+	# path('post_add',views.post_add)
 
     ]  
 	

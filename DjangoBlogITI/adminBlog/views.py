@@ -5,7 +5,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
 from adminBlog.form import cat_form,word_form,usr_block,usr_promote
 from django.contrib.auth.backends import BaseBackend
-from .models import Post, Comment ,Tags ,reply
+from .models import Post, Comment ,Tags ,reply,subscribe
 from adminBlog.form import postform,commentform
 #from .forms import postform,commentform
 
@@ -19,6 +19,7 @@ def users(request):
 def user_add(request):
 	if request.method=='POST':
 		user_form=usr_form(request.POST)
+	
 		if user_form.is_valid():
 			user_form.save()
 			return HttpResponseRedirect('/adminBlog/users')
@@ -159,7 +160,19 @@ def category_edit(request,id):
 #################################################################################
 def side_categories(request):
 	categories=category.objects.all()
-	context={'categories':categories}
+	subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+	lst= []
+	for cat in categories:
+		print(cat.id)
+		print(subs)
+		if cat.id in subs:
+			check = cat.id
+		else:
+			check =-1
+		lst.append(check)
+	print(lst)
+	context={'categories':categories, 'lst':lst}
+
 	return render(request,'side_bar.html',context)
 
 def select(request,name):
@@ -168,17 +181,38 @@ def select(request,name):
 		post=Post.objects.filter(category_id=cat)
 		context={'post':post}
 		return render(request,'select.html',context)
+#def subscribe_fun(request,name):
+
+def subscribes(request, category_id):
+	print("ok")	
+	try:
+		cat = category.objects.get(id = category_id)
+		subscribe.objects.create(user_id = request.user, category_id = cat)
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
+
+
+def unsubscribe(request,category_id):
+	try:
+		cat = category.objects.get(id = category_id)
+		sub = subscribe.objects.get(user_id = request.user, category_id = cat)
+		sub.delete()
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
+
 
 ####################################################################################3
-
-
 
 def body(request):
 	context={
 	'title':'home page',
 	'posts':Post.objects.all(),
 	}
+
+	return render(request,'index.html',context)
+
 	return render(request,'body.html',context)
+
 
 #def createpost (request):
 	#return render(request ,'post/createpost.html')
@@ -202,10 +236,14 @@ def createpost(request):
 	    form = postform(request.POST,request.FILES)
 	    if form.is_valid():
 	    	form.save()
+
+	    	return HttpResponseRedirect('/adminBlog/all_posts')
+
 	    	return HttpResponseRedirect("/adminBlog/body")
+
 	else:
 	    form = postform()
-	    return render(request,'adminBlog/post.html', {'form': form})
+	    return render(request,'post.html', {'form': form})
 
 
 def addcomment(request,postid):
@@ -254,4 +292,31 @@ def post_delete(request,id):
 	post=Post.objects.get(id=id)
 	post.delete()
 	return HttpResponseRedirect('/adminBlog/all_posts')
+
+# def post_add(request):
+# 	if request.method=='POST':
+# 		posts_form=post_form(request.POST)
+# 		if posts_form.is_valid():
+# 			posts_form.save()
+# 			return HttpResponseRedirect('/adminBlodg/all_posts')
+
+
+# 	else:
+# 		posts_form=post_form()
+# 		context={'posts_form':post_form}
+# 		return render(request,'adminBlog/post.html',context)	
+
+def post_edit(request,id):
+	post=Post.objects.get(id=id)
+	if request.method=='POST':
+		posts_form=postform(request.POST,instance=post)
+		if posts_form.is_valid():
+			posts_form.save()
+			return HttpResponseRedirect('/adminBlog/all_posts')
+
+	else:
+		posts_form=postform(instance=post)	
+		context={'form':posts_form}
+		return render(request,'post.html',context)
+
 
