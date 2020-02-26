@@ -162,6 +162,12 @@ def side_categories(request):
 	context={'categories':categories}
 	return render(request,'side_bar.html',context)
 
+def select(request,name):
+	catt=category.objects.filter(name=name)
+	for cat in catt:
+		post=Post.objects.filter(category_id=cat)
+		context={'post':post}
+		return render(request,'select.html',context)
 
 ####################################################################################3
 
@@ -236,6 +242,7 @@ def addreplay(request,commentid):
 
 
 
+
 #############################################
 def all_posts(request):
 	all_posts=Post.objects.all()
@@ -247,4 +254,4 @@ def post_delete(request,id):
 	post=Post.objects.get(id=id)
 	post.delete()
 	return HttpResponseRedirect('/adminBlog/all_posts')
-	
+

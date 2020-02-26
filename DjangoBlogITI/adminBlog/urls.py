@@ -25,12 +25,12 @@ urlpatterns=[
 
 	path('all_posts',views.all_posts),
 	path('post_delete/<id>',views.post_delete),
+	path('select/<name>',views.select)
+
 
 
 	
-	
 
-	
 
     ]  
 	
