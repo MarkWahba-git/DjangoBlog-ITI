@@ -1,0 +1,53 @@
+
+{% load static %}
+{% block content %}
+
+<head><link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}"/></head>
+<head><link rel="stylesheet" type="text/css" href="{% static 'css/mystyle.css' %}"/></head>
+<img src="{%static 'css/images/index.jpeg'%}"width="300" height="300">
+
+  <div>
+
+    <h3>{{post.title}}</h3>
+    <span>published in {{post.post_date|date:'d-m-y'}}</span>
+    <p>{{post.content}}</p>
+    {% for tag in post.tag_name.all %}
+      <h5>{{ tag.tag_name }}</h5>
+    {% endfor %}
+    <h5>{{post.user_id}}</h5>
+    <h5>{{post.category_id}}</h5>
+    {% if post.image%}
+    <img src="{{post.image.url}}" alt="Not found">
+    {% endif %}
+    
+    
+  </div>
+
+
+
+  {%for comm in comment %}
+
+  <h1>{{comm.comment_content}}</h1>
+
+
+  {%endfor%}
+
+  <div class="main-comment-section">
+ 
+      <form method="post" action="addcomment">
+
+        {%csrf_token%}
+        <label for="message">comment</label>
+
+        <input type="textarea" name="message" value="" >
+        <input type="submit" name="" value="add">
+        
+       
+        
+
+      </form>
+
+
+  </div>
+
+{% endblock %}

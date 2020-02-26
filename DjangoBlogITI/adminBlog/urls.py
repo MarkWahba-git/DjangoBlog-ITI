@@ -35,14 +35,6 @@ urlpatterns=[
 	path('post_edit/<id>',views.post_edit)
 	# path('post_add',views.post_add)
 
-
-
-
-
-	
-
-
-
     ]  
 	
 	
