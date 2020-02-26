@@ -17,7 +17,8 @@ urlpatterns=[
 	path('category_edit/<id>',views.category_edit),
 	path('side_categories',views.side_categories),
 	path('all_posts',views.all_posts),
-	path('post_delete/<id>',views.post_delete)
+	path('post_delete/<id>',views.post_delete),
+	path('select/<name>',views.select)
 
 
 	
