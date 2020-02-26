@@ -7,8 +7,13 @@
 
 		{% for st in categories %}
 		<a href="/adminBlog/select/{{st.name}}">{{st.name}}</a></br>
-		<button>
-			<a href="/adminBlog/subscribe_fun/{{st.name}}"> </a>
-		</button>
+		<h1>{{st.id}}</h1>
+        {% if st.id in lst %}
+            <a href= "{% url 'unsubscribe' category_id=st.id %}">subcribed</a>
+        {% else %}
+            <a href= "{% url 'subscribes' category_id=st.id %}">subcribe</a>
+        {% endif %}
+
+        <hr>
 		{% endfor %}
 	<div>

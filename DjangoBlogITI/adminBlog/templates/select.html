@@ -8,7 +8,8 @@
 	<h1>{{post.title}}</h1>
 	<span>{{post.post_date}}</span></br>
 	<span>{{post.post_update}}</span></br>
-	<img src={{post.image}}></br>
+	<img src="{{ MEDIA_URL }}{{post.image}}">
+</br>
 	<p>{{post.content}}</p>
 
 	<p>{{post.user_id}}</p>

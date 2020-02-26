@@ -5,7 +5,7 @@ from django.http import HttpResponse,HttpResponseRedirect
 from adminBlog.form import usr_form
 from adminBlog.form import cat_form,word_form,usr_block,usr_promote
 from django.contrib.auth.backends import BaseBackend
-from .models import Post, Comment ,Tags ,reply
+from .models import Post, Comment ,Tags ,reply,subscribe
 from adminBlog.form import postform,commentform
 #from .forms import postform,commentform
 
@@ -19,6 +19,7 @@ def users(request):
 def user_add(request):
 	if request.method=='POST':
 		user_form=usr_form(request.POST)
+	
 		if user_form.is_valid():
 			user_form.save()
 			return HttpResponseRedirect('/adminBlog/users')
@@ -159,7 +160,19 @@ def category_edit(request,id):
 #################################################################################
 def side_categories(request):
 	categories=category.objects.all()
-	context={'categories':categories}
+	subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+	lst= []
+	for cat in categories:
+		print(cat.id)
+		print(subs)
+		if cat.id in subs:
+			check = cat.id
+		else:
+			check =-1
+		lst.append(check)
+	print(lst)
+	context={'categories':categories, 'lst':lst}
+
 	return render(request,'side_bar.html',context)
 
 def select(request,name):
@@ -170,21 +183,36 @@ def select(request,name):
 		return render(request,'select.html',context)
 #def subscribe_fun(request,name):
 
+def subscribes(request, category_id):
+	print("ok")	
+	try:
+		cat = category.objects.get(id = category_id)
+		subscribe.objects.create(user_id = request.user, category_id = cat)
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
 
 
-
+def unsubscribe(request,category_id):
+	try:
+		cat = category.objects.get(id = category_id)
+		sub = subscribe.objects.get(user_id = request.user, category_id = cat)
+		sub.delete()
+	finally:
+		return HttpResponseRedirect('/adminBlog/side_categories')
 
 
 ####################################################################################3
 
-
-
-def index(request):
+def body(request):
 	context={
 	'title':'home page',
 	'posts':Post.objects.all(),
 	}
+
 	return render(request,'index.html',context)
+
+	return render(request,'body.html',context)
+
 
 #def createpost (request):
 	#return render(request ,'post/createpost.html')
@@ -195,7 +223,7 @@ def post_detail(request,postid):
 	context={
 	'post':post,'comment':coms
 	}
-	return render(request,'adminBlog/showpostdetails.html',context)
+	return render(request,'showpostdetails.html',context)
 
 def like_post(request):
 	post=get_object_or_404(post,id=request.post.get('postid'))	
@@ -205,10 +233,14 @@ def like_post(request):
 
 def createpost(request):
 	if request.method=="POST":
-	    form = postform(request.POST)
+	    form = postform(request.POST,request.FILES)
 	    if form.is_valid():
 	    	form.save()
+
 	    	return HttpResponseRedirect('/adminBlog/all_posts')
+
+	    	return HttpResponseRedirect("/adminBlog/body")
+
 	else:
 	    form = postform()
 	    return render(request,'post.html', {'form': form})
