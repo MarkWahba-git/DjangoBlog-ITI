@@ -14,9 +14,11 @@
 
 	<p>{{post.user_id}}</p>
 
-	<p>{{post.category}}</p>
+	<p>{{post.category_id}}</p>
 
-	<p>{{post.tag_name}}</p>
+	{% for tag in post.tag_name.all %}
+		<p>{{ tag }}</p>
+	{% endfor %}
 	<hr>
 	{% endfor %}
 

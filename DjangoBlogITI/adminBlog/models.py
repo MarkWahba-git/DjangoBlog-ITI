@@ -18,12 +18,11 @@ class subscribe(models.Model):
 	user_id=models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
 
-class Tags (models.Model):
+class Tags(models.Model):
 	tag_name=models.CharField(max_length=50)
 
 	def __str__(self):
 		return self.tag_name	
-
 
 class Post (models.Model):
 	title= models.CharField(max_length=100)
