@@ -11,8 +11,8 @@ urlpatterns = [
     # url('signin/', views.login_view, name='signin'),
     # # path('post', views.createpost),
 	path('indeex/',views.body),
-	path('showpostdetails/<postid>/',views.post_detail),
-	path('showpostdetails/<postid>/addcomment',views.addcomment),
+	path('showpost/<postid>/',views.post_detail),
+	path('showpost/<postid>/addcomment',views.addcomment),
     
 ]
 

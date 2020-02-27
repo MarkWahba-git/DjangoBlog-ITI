@@ -187,7 +187,7 @@
 
               <div class="row">
                 <div class="col-md-10"id="post">
-                  <a href="blog-single.html" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                  <a href="/djangoBlog/showpost/{{post.id}}" class="blog-entry element-animate" data-animate-effect="fadeIn">
                     <h3>{{post.title}}</h3>
                     {% if post.image %}
                     <img src="{{post.image.url}}" alt="Not found">
@@ -198,7 +198,7 @@
                         <span class="mr-2">published in {{post.post_date|date:'d-m-y'}}</span> &bullet;
                         <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                       </div>
-                      <a class="btn btn-primary" href="showpostdetails/{{post.id}}">Read more</a>
+                      <a class="btn btn-primary" href="/djangoBlog/showpost/{{post.id}}">Read more</a>
 
                       <!-- <h2>How to Find the Video Games of Your Youth</h2> -->
                     </div>
