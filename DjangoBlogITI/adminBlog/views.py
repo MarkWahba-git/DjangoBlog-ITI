@@ -228,9 +228,9 @@ def body(request):
 	'posts':Post.objects.all(),
 	}
 
-	return render(request,'index.html',context)
+	return render(request,'indeex.html',context)
 
-	return render(request,'body.html',context)
+	# return render(request,'body.html',context)
 
 
 #def createpost (request):

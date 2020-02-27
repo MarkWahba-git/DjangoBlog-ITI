@@ -16,6 +16,7 @@ urlpatterns = [
     path('signup/',views.signup),
     path('about/',views.about),
     path('contact/',views.contact),
+    
     path("signin",views.login_view),
 
 	path('showpost/<postid>/',views.post_detail),

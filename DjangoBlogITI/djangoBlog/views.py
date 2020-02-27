@@ -52,7 +52,7 @@ def confirm_login_allowed(self, user):
         
         if not user.is_active:
             raise forms.ValidationError(
-                self.error_messages['inactive'],
+                self.error_messages['your account is not active, please contact the admin'],
                 code='inactive',
             )
 

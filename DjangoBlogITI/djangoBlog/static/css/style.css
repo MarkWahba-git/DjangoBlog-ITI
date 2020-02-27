@@ -1378,3 +1378,10 @@ blockquote {
 #post{
   margin: 50px 20px 20px auto;
 }
+
+
+
+#imgg{
+  width: 5%;
+border-radius: 50%;
+}

@@ -99,14 +99,21 @@
       <!-- END header -->
 
     <section class="site-section py-lg">
-      <div class="container">
+      <div class="container justify-content-center">
         
         <div class="row blog-entries element-animate">
 
           <div class="col-md-12 col-lg-8 main-content">
+             <div class="card">
+            <div class="card-headers">
+              <div class="card-title" style=" margin-top: 2px">
+               <h1>{{post.title}}</h1>
+               </div>    
+            </div>
+            <div class="card-body">
             <img src="images/img_10.jpg" alt="Image" class="img-fluid mb-5">
              <div class="post-meta">
-                  <h1>{{post.title}}</h1>    
+                 
                         <span>published in {{post.post_date|date:'d-m-y'}}</span>
                         <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
                       </div>
@@ -128,6 +135,7 @@
               <div class="col-md-6 mb-4">
                 <img src="/static/images/img_11.jpg" alt="Image placeholder" class="img-fluid">
               </div> -->
+
               {% if post.image%}
                <img src="{{post.image.url}}" alt="Not found">
                {% endif %}
@@ -153,7 +161,7 @@
               <ul>
                 <li class="comment">
                   <div class="vcard">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
+                    <img id="imgg"src="/static/images/user.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
                      <h1>{{d.co.comment_content}}</h1>
@@ -163,7 +171,6 @@
                 </li>
               </ul>
               {%if d.re %}
-              <h1>ooooooooooooooooooooooooooooooooooo</h1>
               <ul>
                 <li class="comment">
                   <div class="vcard">
@@ -193,7 +200,7 @@
                    
               </div>
               <!-- END comment-list -->
-  {%endfor%}
+  {%endfor%}<br><br><br>
 
   <div class="main-comment-section">
  
@@ -209,8 +216,7 @@
         
 
       </form>
-<<<<<<< HEAD
-=======
+
 <div>
 
   <button><a href="/djangoBlog/like/{{post.id}}">like</a></button>
@@ -221,7 +227,7 @@
 
           <!-- END main-content -->
 
->>>>>>> deaba0cf678ea990869c90468377058186136700
+
          
         </div>
       </div>

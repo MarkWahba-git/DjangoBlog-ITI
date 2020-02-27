@@ -196,19 +196,20 @@
                   <a href="/djangoBlog/showpost/{{post.id}}" class="blog-entry element-animate" data-animate-effect="fadeIn">
                     <h3>{{post.title}}</h3>
                     {% if post.image %}
-                    <img src="{{post.image.url}}" alt="Not found">
+                  <!--   <img src="{{post.image.url}}" alt="Not found"> -->
                     {% endif %}
                     <div class="blog-content-body">
                       <div class="post-meta">
                         <!-- <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span> -->&bullet;
-                        <span class="mr-2">published in {{post.post_date|date:'d-m-y'}}</span> &bullet;
-                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                        
+                      <!--   <span class="ml-2"><span class="fa fa-comments"></span> </span> -->
                       </div>
                       <a class="btn btn-primary" href="/djangoBlog/showpost/{{post.id}}">Read more</a>
 
                       <!-- <h2>How to Find the Video Games of Your Youth</h2> -->
                     </div>
                   </a>
+                  <span class="mr-2">published in {{post.post_date|date:'d-m-y'}}</span> 
                 </div>
                 
 
