@@ -23,7 +23,7 @@ def users(request):
 
 def user_add(request):
     if request.method == 'POST':
-        user_form = UserRegisterationForm(request.POST)
+        form = UserRegisterationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')

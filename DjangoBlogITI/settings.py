@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pyblog',
         'USER': 'root' ,	
-	'PASSWORD':'thinkpad'	
+	    'PASSWORD':'thinkpad'	
     }
 }
 

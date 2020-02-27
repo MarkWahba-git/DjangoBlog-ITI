@@ -112,6 +112,8 @@
                       </div>
                {% for tag in post.tag_name.all %}
                 <h5 class="category mb-5">{{ tag.tag_name }}</h5>
+                <!-- <button><a href="/djangoBlog/like/{{post.id}}">like</a></button>
+                <button><a href="/djangoBlog/unlike/{{post.id}}">dislike</a></button> -->
                      {% endfor %}
            
            
@@ -207,6 +209,19 @@
         
 
       </form>
+<<<<<<< HEAD
+=======
+<div>
+
+  <button><a href="/djangoBlog/like/{{post.id}}">like</a></button>
+  <button><a href="/djangoBlog/dislike/{{post.id}}">dislike</a></button>
+
+
+</div>
+
+          <!-- END main-content -->
+
+>>>>>>> deaba0cf678ea990869c90468377058186136700
          
         </div>
       </div>
