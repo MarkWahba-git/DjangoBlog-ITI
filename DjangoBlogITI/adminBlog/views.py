@@ -7,6 +7,11 @@ from adminBlog.form import cat_form,word_form,usr_block,usr_promote
 from django.contrib.auth.backends import BaseBackend
 from .models import Post, Comment ,Tags ,reply,subscribe
 from adminBlog.form import postform,commentform
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView
+from .form import UserRegisterationForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 #from .forms import postform,commentform
 
 
@@ -17,18 +22,32 @@ def users(request):
 	return render(request,'users_tables.html',context)
 
 def user_add(request):
-	if request.method=='POST':
-		user_form=usr_form(request.POST)
+    if request.method == 'POST':
+        user_form = UserRegisterationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return HttpResponseRedirect('/adminBlog/users')
+    else:
+        form = UserRegisterationForm()
+    return render(request, 'user_form.html',{'usr_form': form})
+
+# def user_add(request):
+# 	if request.method=='POST':
+# 		user_form=usr_form(request.POST)
 	
-		if user_form.is_valid():
-			user_form.save()
-			return HttpResponseRedirect('/adminBlog/users')
+# 		if user_form.is_valid():
+# 			user_form.save()
+# 			return HttpResponseRedirect('/adminBlog/users')
 
 
-	else:
-		user_form=usr_form()
-		context={'usr_form':user_form}
-		return render(request,'user_form.html',context)	
+# 	else:
+# 		user_form=usr_form()
+# 		context={'usr_form':user_form}
+# 		return render(request,'user_form.html',context)	
 
 def user_delete(request,id):
 	usr=User.objects.get(id=id)

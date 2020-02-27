@@ -126,7 +126,7 @@ def select(request,name):
 	for cat in catt:
 		post=Post.objects.filter(category_id=cat)
 		context={'post':post}
-		return render(request,'select.html',context)
+		return render(request,'indexcategory.html',context)
 #def subscribe_fun(request,name):
 
 def subscribes(request, category_id):
@@ -135,7 +135,7 @@ def subscribes(request, category_id):
 		cat = category.objects.get(id = category_id)
 		subscribe.objects.create(user_id = request.user, category_id = cat)
 	finally:
-		return HttpResponseRedirect('/adminBlog/side_categories')
+		return HttpResponseRedirect('/djangoBlog/indeex')
 
 
 def unsubscribe(request,category_id):
@@ -144,4 +144,4 @@ def unsubscribe(request,category_id):
 		sub = subscribe.objects.get(user_id = request.user, category_id = cat)
 		sub.delete()
 	finally:
-		return HttpResponseRedirect('/adminBlog/side_categories')
+		return HttpResponseRedirect('/djangoBlog/indeex')

@@ -13,6 +13,7 @@ urlpatterns = [
 	path('indeex/',views.body),
 	path('showpostdetails/<postid>/',views.post_detail),
 	path('showpostdetails/<postid>/addcomment',views.addcomment),
+    path('select/<name>/',views.select),
     # path('indeex',views.side_categories),
 	path('sub/<category_id>', views.subscribes, name ='subscribes'),
     path('unsub/<category_id>', views.unsubscribe, name ='unsubscribe')

@@ -1,7 +1,22 @@
-<h1>student form regestration<h1>
-<form method=POST> {%csrf_token%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+{% extends 'base.html' %}
+{% block main_block %}
+ <div class="container">
+	<div class="card card-register mx-auto mt-5">
+      <div class="card-header">Add user</div>
+      <div class="card-body">
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
 	{{usr_form.as_p}} 
 
-	<button type="submit">save</button>
-
+<button type="submit" class="btn btn-primary" >create user</button>
 </form>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}
+</html>
