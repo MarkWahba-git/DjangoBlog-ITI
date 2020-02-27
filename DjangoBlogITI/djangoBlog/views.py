@@ -78,7 +78,7 @@ def post_detail(request,postid):
     context={
     'post':post,'comment':coms
     }
-    return render(request,'showpostdetails.html',context)
+    return render(request,'showpost.html',context)
 
 def like_post(request):
     post=get_object_or_404(post,id=request.post.get('postid'))  
@@ -93,7 +93,7 @@ def addcomment(request,postid):
         con=request.POST.get('message')
         obj=Comment(post_name=post,user_id=user,comment_content=con)
         obj.save()
-        return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
+        return HttpResponseRedirect("/djangoBlog/showpost/"+str(postid))
 
 def addreplay(request,commentid):
     if request.method=="POST":      
@@ -102,6 +102,9 @@ def addreplay(request,commentid):
         con=request.POST.get('message')
         obj=Comment(post_name=post,user_id=user,comment_content=con)
         obj.save()
+
+        return HttpResponseRedirect("/djangoBlog/showpost/"+str(postid))
+
         return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
 #############################################################################
 def side_categories(request):
@@ -145,3 +148,7 @@ def unsubscribe(request,category_id):
 		sub.delete()
 	finally:
 		return HttpResponseRedirect('/djangoBlog/indeex')
+
+		return HttpResponseRedirect('/adminBlog/side_categories')
+
+
