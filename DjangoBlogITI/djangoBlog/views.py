@@ -75,8 +75,20 @@ def body(request):
 def post_detail(request,postid):
     post=get_object_or_404(Post,pk=postid)
     coms=Comment.objects.filter(post_name_id=postid)
+    data = []
+   
+
+    for com in coms :
+        dic={}
+        try :
+            rep = reply.objects.get(comment_id_id = com.id )
+            dic={'co':com,'re':rep}
+        except Exception as e :
+            dic={'co':com}
+        finally:
+            data.append(dic)
     context={
-    'post':post,'comment':coms
+    'post':post,'data':data
     }
     return render(request,'showpost.html',context)
 
@@ -95,17 +107,14 @@ def addcomment(request,postid):
         obj.save()
         return HttpResponseRedirect("/djangoBlog/showpost/"+str(postid))
 
-def addreplay(request,commentid):
+def addreply(request,comid):
     if request.method=="POST":      
-        comment=get_object_or_404(Post,pk=commentid)
+        comment=get_object_or_404(Comment,pk=comid)
         user=request.user
         con=request.POST.get('message')
-        obj=Comment(post_name=post,user_id=user,comment_content=con)
-        obj.save()
-
-        return HttpResponseRedirect("/djangoBlog/showpost/"+str(postid))
-
-        return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
+        ob=reply(comment_id=comment,user_id=user,reply_content=con)
+        ob.save()
+        return HttpResponseRedirect("/djangoBlog/showpost/"+str(comment.post_name_id))
 #############################################################################
 def side_categories(request):
 	categories=category.objects.all()

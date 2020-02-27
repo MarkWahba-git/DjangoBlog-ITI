@@ -14,11 +14,12 @@ urlpatterns = [
 
 	path('showpost/<postid>/',views.post_detail),
 	path('showpost/<postid>/addcomment',views.addcomment),
+	path('showpost/<comid>/addreply',views.addreply),
 
 	path('showpostdetails/<postid>/',views.post_detail),
 	path('showpostdetails/<postid>/addcomment',views.addcomment),
     path('select/<name>/',views.select),
-    # path('indeex',views.side_categories),
+     path('indeex',views.side_categories),
 	path('sub/<category_id>', views.subscribes, name ='subscribes'),
     path('unsub/<category_id>', views.unsubscribe, name ='unsubscribe')
 

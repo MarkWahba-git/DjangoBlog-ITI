@@ -135,7 +135,7 @@ def forbidden_edit(request,id):
 		return render(request,'newbadword.html',context)
 #####################################################################################
 def categories(request):
-	categories=category.objects.all()
+	categories= category.objects.all()
 	context={'categories':categories}
 	return render(request,'categories.html',context)
 
@@ -276,11 +276,11 @@ def addcomment(request,postid):
 
 def addreplay(request,commentid):
 	if request.method=="POST":		
-		comment=get_object_or_404(Post,pk=commentid)
+		comment=get_object_or_404(Comment,pk=commentid)
 		user=request.user
-		con=request.POST.get('message')
-		obj=Comment(post_name=post,user_id=user,comment_content=con)
-		obj.save()
+		co=request.POST.get('message')
+		ob=Comment(post_name=post,user_id=user,comment_content=con)
+		ob.save()
 		return HttpResponseRedirect("/adminBlog/showpostdetails/"+str(postid))
 	
 
