@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 {% load static %}
@@ -104,7 +105,8 @@
                   <a class="nav-link" href="/djangoBlog/contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="/djangoBlog/logout">logout</a>
+                  <!-- <a class="nav-link" href="/djangoBlog/logout">logout</a> -->
+                  <a class="nav-link" href="{% url 'logout'%}?next={% url 'login' %}">logout1</a>
                 </li>
 
               </ul>
@@ -287,12 +289,14 @@
                   <li><a href="#">Adventure <span>(14)</span></a></li> -->
                   {% for st in categories %}
                   <li><a href="/djangoBlog/select/{{st.name}}">{{st.name}}<span>(12)</span></a>
-		                <!-- <h1>{{st.id}}</h1> -->
+                    <!-- <h1>{{st.id}}</h1> -->
+                    {% if request.user.is_authenticated %}
                       {% if st.id in lst %}
                     <a href= "{% url 'unsubscribe' category_id=st.id %}">subcribed</a>
-                    {% else %}
+                      {% else %}
                   <a href= "{% url 'subscribes' category_id=st.id %}">subcribe</a>
-                    {% endif %}
+                     {% endif %}
+                  {% endif %}
 
 
 		                {% endfor %}
