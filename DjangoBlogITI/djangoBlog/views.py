@@ -7,7 +7,7 @@ from .forms import UserRegisterationForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from adminBlog.models import Post, Comment ,Tags ,reply
+from adminBlog.models import Post, Comment ,Tags ,reply,Likes
 from djangoBlog.forms import postform,commentform
 from adminBlog.models import Post, Comment ,Tags ,reply,subscribe
 
@@ -20,7 +20,7 @@ def signup(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('/djangoBlog/home')
+            return redirect('/djangoBlog/indeex')
         else:
         # form = UserRegisterationForm()
             return render(request, 'signup.html',{'form': form})
@@ -28,13 +28,21 @@ def signup(request):
 def home(request): 
 	return render(request, 'home.html')
 
+def about(request): 
+	return render(request, 'about.html')
+
+
+def contact(request): 
+	return render(request, 'contact.html')    
+
+
 def login_view(request):
     if request.method == 'POST':
         form= AuthenticationForm(data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request,user)
-            return redirect("/djangoBlog/home")
+            return redirect("/djangoBlog/indeex")
 	
     else:
         form= AuthenticationForm()
@@ -50,18 +58,21 @@ def confirm_login_allowed(self, user):
 
 
 def body(request):
+
+    
     categories=category.objects.all()
-    subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+    
+    # subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
     lst= []
     for cat in categories:
         print(cat.id)
-        print(subs)
-        if cat.id in subs:
-            check = cat.id
-        else:
-            check =-1
-        lst.append(check)
-    print(lst)
+        # print(subs)
+        # if cat.id in subs:
+            # check = cat.id
+        # else:
+            # check =-1
+        # lst.append(check)
+    # print(lst)
     context={
     # 'title':'home page',
     'posts':Post.objects.all(),
@@ -69,12 +80,18 @@ def body(request):
     }
     return render(request,'indeex.html',context)
 
-#def createpost (request):
-    #return render(request ,'post/createpost.html')
+
 
 def post_detail(request,postid):
     post=get_object_or_404(Post,pk=postid)
     coms=Comment.objects.filter(post_name_id=postid)
+
+
+    likeCount = Likes.objects.filter(postID_id=postid, isLiked=False).count()
+    if likeCount==10:
+        Post.objects.get(id=postid).delete()
+        return HttpResponseRedirect('/djangoBlog/indeex')
+
     context={
     'post':post,'comment':coms
     }
@@ -151,6 +168,44 @@ def unsubscribe(request,category_id):
 
 		return HttpResponseRedirect('/adminBlog/side_categories')
 
+def liked(request,id):
+    post = Post.objects.get(id=id)
+    # print('idddddddddddddddd='+postID)
+    # print('idddddddddddddddd='+postTitle)
+
+
+    currentUser = request.user.id
+    try:
+        like, created = Likes.objects.get_or_create(
+            postID_id=id, userID_id=currentUser, isLiked=True)
+        Likes.objects.filter(
+            postID_id=id, userID_id=currentUser, isLiked=False).delete()
+            
+        
+    except Exception as e:
+        pass
+    finally:
+        likesDic = {'post': post, 'user': currentUser}
+        return HttpResponseRedirect('/djangoBlog/showpost/'+id)
+
+        
+
+
+def disliked(request,id):
+    post = Post.objects.get(id=id)
+    print('dislikeeeeeeeeed')
+    currentUser = request.user.id
+    try:
+        dislike, created = Likes.objects.get_or_create(
+            postID_id=id, userID_id=currentUser, isLiked=False)
+        Likes.objects.filter(
+            postID_id=id, userID_id=currentUser, isLiked=True).delete()
+
+    except Exception as e:
+        pass
+    finally:
+        likesDic = {'post': post, 'user': currentUser}
+        return HttpResponseRedirect('/djangoBlog/showpost/'+id)
 
 
 
