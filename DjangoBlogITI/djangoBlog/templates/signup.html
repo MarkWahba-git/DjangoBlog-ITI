@@ -22,7 +22,25 @@
     <div class="card card-register mx-auto mt-5">
       <div class="card-header">Register an Account</div>
       <div class="card-body">
+
+        
         <form method="post">
+          <fieldset class="form-group">
+              <legend class="boarder-bottom mb-4">Join Today!</legend>
+              {% csrf_token %}
+              {{ form }}
+          </fieldset>
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-4">Create account</button>
+          </div>
+        </form>
+        <!-- <div class="pt-3">
+          <small class="text-muted">Already have an account?<a class="ml-2" href="{% url 'login' %}"> Login</a> </small>
+        </div> -->
+
+
+
+        <!-- <form method="post">
            {% csrf_token %}
     {% for field in form %}
       <p>
@@ -37,7 +55,7 @@
       </p>
     {% endfor %}
     <button type="submit" class="btn btn-primary">Sign up</button>
-        </form>
+        </form> -->
 
       </div>
     </div>
@@ -50,3 +68,5 @@
 </body>
 
 </html>
+
+
