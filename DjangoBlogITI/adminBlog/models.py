@@ -58,7 +58,13 @@ class reply(models.Model):
 	reply_content=models.TextField(max_length=100)
 	user_id=models.ForeignKey(User, on_delete=models.DO_NOTHING)
 	comment_id=models.ForeignKey(Comment , on_delete=models.DO_NOTHING)
+  
 
+
+class Likes(models.Model):
+    userID = models.ForeignKey(User, on_delete=models.CASCADE)
+    postID = models.ForeignKey(Post, on_delete=models.CASCADE)
+    isLiked=models.BooleanField(null=True)
 	
 
 
