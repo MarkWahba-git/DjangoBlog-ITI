@@ -1,7 +1,8 @@
-{% load static %}
 
 <!doctype html>
 <html lang="en">
+{% load static %}
+
   <head>
     <title>Colorlib Wordify &mdash; Minimal Blog Template</title>
     <meta charset="utf-8">
@@ -62,10 +63,10 @@
             <div class="collapse navbar-collapse" id="navbarMenu">
               <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                  <a class="nav-link" href="index.html">Home</a>
+                  <a class="nav-link" href="/djangoBlog/indeex/">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Log in</a>
+                  <a class="nav-link" href="/djangoBlog/signin">Log in</a>
                 </li>
                <li class="nav-item">
                   <a class="nav-link" href="#">Sign up</a>
@@ -74,7 +75,7 @@
                 </li>
 
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                  <!-- <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a> -->
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
                     <a class="dropdown-item" href="category.html">Lifestyle</a>
                     <a class="dropdown-item" href="category.html">Food</a>
@@ -150,6 +151,7 @@
             <div class="pt-5">
              
                 {%for d in data %}
+
               <ul>
                 <li class="comment">
                   <div class="vcard">
@@ -162,15 +164,17 @@
                   </div>
                 </li>
               </ul>
+            
+             
               {%if d.re %}
-              <h1>ooooooooooooooooooooooooooooooooooo</h1>
+           
               <ul>
                 <li class="comment">
                   <div class="vcard">
                     <img src="images/person_1.jpg" alt="Image placeholder">
                   </div>
                   <div class="comment-body">
-                     <h1>{{d.re.reply_content}}</h1>
+                     <h1>{{d.re.reply_content }}</h1>
                   </div>
                 </li>
               </ul>
@@ -179,14 +183,14 @@
               <div class="main-comment-section">
  
                 <form method="post" action="/djangoBlog/showpost/{{d.co.id}}/addreply">
-
+                   {% if request.user.is_authenticated %}
                   {%csrf_token%}
                   <label for="message">reply</label>
 
                   <input type="textarea" name="message" value="" >
                   <input type="submit" name="" value="add">
                   
-                 
+                 {% endif %}
                   
 
                 </form>
@@ -194,34 +198,38 @@
               </div>
               <!-- END comment-list -->
   {%endfor%}
+             
 
   <div class="main-comment-section">
  
       <form method="post" action="addcomment">
 
         {%csrf_token%}
+        {% if request.user.is_authenticated %}
         <label for="message">comment</label>
 
         <input type="textarea" name="message" value="" >
         <input type="submit" name="" value="add">
-        
+        {% endif %}
        
         
 
       </form>
-<<<<<<< HEAD
-=======
+
+
 <div>
+  {% if request.user.is_authenticated %}
 
   <button><a href="/djangoBlog/like/{{post.id}}">like</a></button>
   <button><a href="/djangoBlog/dislike/{{post.id}}">dislike</a></button>
+  {% endif %}
 
 
 </div>
 
           <!-- END main-content -->
 
->>>>>>> deaba0cf678ea990869c90468377058186136700
+
          
         </div>
       </div>

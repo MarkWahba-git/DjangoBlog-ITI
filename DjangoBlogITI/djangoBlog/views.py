@@ -61,23 +61,27 @@ def body(request):
 
     
     categories=category.objects.all()
-    
-    # subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
-    lst= []
+    #if request.user.is_authenticated:
+        #subs = subscribe.objects.filter(user_id=request.user).values_list('category_id',flat=True) 
+        #lst= []
     for cat in categories:
         print(cat.id)
-        # print(subs)
-        # if cat.id in subs:
-            # check = cat.id
-        # else:
-            # check =-1
-        # lst.append(check)
-    # print(lst)
+    #     print(subs)
+    #     if cat.id in subs:
+    #         check = cat.id
+    #     else:
+    #         check =-1
+    #         lst.append(check)
+    #     print(lst)
+    
+    # print(posts)
+    posts=Post.objects.all()
+    print(posts)
     context={
     # 'title':'home page',
-    'posts':Post.objects.all(),
-    'categories':categories, 'lst':lst
-    }
+        'posts':posts,
+        'categories':categories #'lst':lst
+        }
     return render(request,'indeex.html',context)
 
 
@@ -118,6 +122,7 @@ def like_post(request):
 
 
 def addcomment(request,postid):
+    
     if request.method=="POST":      
         post=get_object_or_404(Post,pk=postid)
         user=request.user

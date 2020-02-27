@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djangoBlog',
     'adminBlog',
+ 
     
 
 ]
@@ -125,6 +126,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/image/'
-
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'image') 
+# LOGOUT_REDIRECT_URL='djangoBlog/indeex/'
+# LOGOUT_REDIRECT_URL = 'djangoBlog/indeex/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'image')  
 
